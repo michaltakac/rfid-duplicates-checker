@@ -113,7 +113,7 @@ pub fn main() {
         .window_size((700.0, 500.0));
 
     let initial_state = WindowState {
-        text: "Open TXT file, where RFIDs\nare currently saved".to_string(),
+        text: "Otvor TXT súbor, do ktorého\nsa zapisujú RFID dáta.".to_string(),
         color: Color::BLACK,
         file_path: None,
     };
@@ -136,12 +136,12 @@ fn ui_builder() -> impl Widget<WindowState> {
         .allowed_types(vec![txt])
         .default_type(txt)
         .clone()
-        .name_label("TXT source")
-        .title("Search for a txt file where RFIDs are saved")
-        .button_text("Start checking for duplicates");
+        .name_label("TXT subor")
+        .title("Vyber TXT subor s RFID datami")
+        .button_text("Spusti program");
 
     // let input = TextBox::new();
-    let open = Button::new("Open TXT file...").on_click(move |ctx, _, _| {
+    let open = Button::new("Otvor TXT súbor...").on_click(move |ctx, _, _| {
         ctx.submit_command(druid::commands::SHOW_OPEN_PANEL.with(open_dialog_options.clone()))
     });
 
@@ -163,11 +163,11 @@ impl Widget<WindowState> for StatusPanel {
                 data.color = cmd.get_unchecked(UPDATED_FILE).clone();
                 
                 if data.color == Color::GREEN {
-                    data.text = "RFIDs are unique.\nGood job so far!".to_string();
+                    data.text = "Všetky RFIDs sú unikátne.\nvýborná práca!".to_string();
                 } else if data.color == Color::RED {
-                    data.text = "DUPLICATES\nFOUND!!!".to_string();
+                    data.text = "NAŠLI SA\nDUPLIKÁTY!!!".to_string();
                 } else {
-                    data.text = "No RFIDs found.".to_string();
+                    data.text = "Textový súbor zatiaľ\nneobsahuje RFID dáta.".to_string();
                 }
             }
             _ => (),
